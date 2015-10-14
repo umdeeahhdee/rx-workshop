@@ -20,8 +20,10 @@ import java.util.concurrent.TimeUnit;
         executor.scheduleWithFixedDelay(() -> {
             final int price = priceService.getPrice();
             rollingBuffer.add(price);
-            SwingUtilities.invokeLater(() -> priceDisplay.setPrice(price));
-            SwingUtilities.invokeLater(() -> priceDisplay.setAverage(rollingBuffer.getAverage()));
+            SwingUtilities.invokeLater(() -> {
+                priceDisplay.setPrice(price);
+                priceDisplay.setAverage(rollingBuffer.getAverage());
+            });
         }, 0, 500, TimeUnit.MILLISECONDS);
 
     }
