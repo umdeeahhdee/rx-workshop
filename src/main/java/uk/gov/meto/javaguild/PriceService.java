@@ -2,9 +2,6 @@ package uk.gov.meto.javaguild;
 
 import java.util.Random;
 
-/**
- * Created by paul on 14/10/15.
- */
 public class PriceService {
 
     private final int maxDelay;
