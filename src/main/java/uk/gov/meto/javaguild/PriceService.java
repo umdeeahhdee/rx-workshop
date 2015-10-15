@@ -1,6 +1,9 @@
 package uk.gov.meto.javaguild;
 
+import rx.Observable;
+
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class PriceService {
 
@@ -13,12 +16,14 @@ public class PriceService {
         minDelay = 200;
     }
 
-    public int getPrice() {
-        try {
-            Thread.sleep((int) (Math.random() * (maxDelay - minDelay) + minDelay));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return random.nextInt(1000);
+    private int delayMillis() {
+        return (int) (Math.random() * (maxDelay - minDelay) + minDelay);
     }
+
+    public Observable<Integer> prices(Observable<Long> trigger) {
+        return trigger.flatMap(ignored ->
+                Observable.just(random.nextInt(1000)))
+                .delay(delayMillis(), TimeUnit.MILLISECONDS);
+    }
+
 }
