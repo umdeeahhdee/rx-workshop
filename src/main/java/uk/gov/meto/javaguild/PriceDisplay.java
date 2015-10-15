@@ -20,7 +20,7 @@ public class PriceDisplay {
         jFrame.setVisible(true);
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         priceLabel.setText("Price: " + price);
     }
 
